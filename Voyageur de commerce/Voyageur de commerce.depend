@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1710338128 source:c:\users\jbruneau\desktop\tp c++\tp c++\voyageur de commerce\main.cpp
+	<iostream>
+	<vector>
+	<cmath>
+	<limits>
+

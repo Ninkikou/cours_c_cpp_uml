@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1710341695 source:c:\users\jbruneau\desktop\tp c++\tp c++\demineur\main.cpp
+	<cstdlib>
+	<iostream>
+	<ctime>
+	<vector>
+
