@@ -1,0 +1,44 @@
+// Paris avec coordonn�es x=2, y=3
+Le commentaire ajoute de la complexité inutile. Pourquoi Paris ? Paris n'est pas aux coordonnées 1, 2
+
+N'hésitez pas à donner des noms explicites (sans abbréviations).
+Dans ce cas playerX est acceptable mais un lecteur avec l'esprit tordu pourrait y voir autre chose que la longitude du jour. movePlayer(int dx, int dy) n'est pas idéal non plus. Evitez toute confusion autant que possible.
+COmme par exemple avec int newX = playerX + dx;
+
+
+On préfère utiliser les méthodes si possible -> visited.get(j) plutôt que visited[i]
+
+D'une manière générale, encapsulez les variables globales (playerX et playerY) dans des structures de plus haut niveau (par exemple une classe Player qui aurait une longitude et une latitude).
+N'hésitez pas à donner des noms explicites (sans abbréviations).
+Dans ce cas playerX est acceptable mais un lecteur avec l'esprit tordu pourrait y voir autre chose que la longitude du jour. movePlayer(int dx, int dy) n'est pas idéal non plus. Evitez toute confusion autant que possible.
+
+Par rapport à la thématique du cours on aurait apprécié une approche orienté objet.
+Avec des noms comme printMaze et movePlayer vous avez fait une bonne moitié du chemin vers l'orienté objet.
+Vous pouvez aller jusqu'au en donnant les responsabilités d'effectuer ces actions à des classes (Maze et Player sont des noms tout trouvés).
+On se retrouverait ainsi avec une classe Maze contenant la structure du labyrinthe, une fonction load et une fonction print. Cette classe sera toute trouvée pour des fonctions comme bool isValidPosition ou bool isExitBlock qui permetteront d'abstraire la logique qui va derriere.
+Puis une classe Player avec par exemple move pour la responsabilité de faire bouger le joueur dans la structure du labyrinthe
+
+On ne s'attend pas à trouver l'output Deplacez-vous avec 'z' (haut), 's' (bas), 'q' (gauche), 'd' (droite). Appuyez sur 'x' pour quitter.\n dans la fonction printMaze.
+La fonction printMaze annonce afficher le labyrinthe, elle ne devrait pas faire plus que ce qu'elle prétend faire.
+La demande d'input de l'utilisateur aurait plus sa place dans la boucle while ou encapsulée dans une methode getDirection
+
+La fonction movePlayer s'occupe aussi de gérer ce qu'il se passe une fois arrivé à la sortie.
+Elle devrait donc s'appeler movePlayerAndHandleExitIfOnExitBlock
+On se rend assez facilement compte que la fonction en fait trop (comment faire s'il faut implémenter un combat avec un boss par exmple?)
+Vous avez fait une bonne partie du travail. La fonction a un nom clair, mais qui ne représente pas ce qu'elle fait (ce qui aurait été plus compliqué à déceler si le nom n'était pas clair), puis à l'interieur elle est découpée en plusieurs parties qui font des choses bien différentes.
+Vous pouvez aller jusqu'au bout relativement facilement à partir de la:
+Pour donner un exemple simpliste :
+
+bool Maze::isValidPosition(int newLatitude, int newLongitude) {
+    return isInMaze(newLatitude, newLongitude) and not isWall(newLatitude, newLongitude);
+}
+
+puis dans la boucle de jeu : 
+if (not maze.isValidPosition(newLatitude, newLongitude)) {
+    return 1;
+}
+movePlayer(newLatitude, newLongitude);
+
+Abstraire la direction avec une structure ou un Enum peut être utilise afin de ne pas avoir des (0, -1) etc pas forcément facile à réellement comprendre au premier coup d'oeil
+
+15/20
